@@ -21,12 +21,13 @@ const PreviewPage = () => {
 
 
   useEffect(() => {
-    if (id && !isNaN(Number(id))) {
-      getListingCaseById(Number(id)).then((res) => {
+    if (listingId !== undefined) {
+      getListingCaseById(listingId).then((res) => {
         setListing(res);
+        console.log('Fetched listing:', res);
       });
     }
-  }, [id]);
+  }, [listingId]);
   return (
     <div className="flex flex-col">
       <PreviewPageHeader />

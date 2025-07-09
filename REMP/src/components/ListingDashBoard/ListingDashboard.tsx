@@ -4,9 +4,10 @@ import { getListingCases } from "../../api/listingcase/listing-api";
 import { ListingCase } from "../../interfaces/listing-case";
 import PropertyModalContainer from "../PropertyModalContainer"
 
-import ListingUpdateDialog from "./ListingUpdate";
-import DeleteListingButton from "./DeleteListing";
+
 import PropertyDetail from "../PropertyDetails";
+import DeleteListingButton from "./DeleteListing";
+import ListingUpdateDialog from "./ListingUpdate";
 
 
 interface ListingDashboardProps {

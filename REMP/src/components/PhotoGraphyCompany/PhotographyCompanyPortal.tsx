@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ListingDashboard from '../ListingDashboard/ListingDashboard';
+import ListingDashboard from '../ListingDashBoard/ListingDashboard';
 import AgentList from '../AgentList/AgentList';
 
 const PhotographyCompanyPortal = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import axios from 'axios';
 
@@ -35,6 +35,16 @@ export default function CreateAgentModel({ isVisible, onClose, onCreateSuccess }
       [name]: value
     }));
   };
+  useEffect(() => {
+  if (error || success) {
+    const timer = setTimeout(() => {
+      setError(null);
+      setSuccess(null);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }
+}, [error, success]);
+
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -161,23 +171,35 @@ export default function CreateAgentModel({ isVisible, onClose, onCreateSuccess }
           </div>
 
           {/* Footer */}
-          <div className='h-[10%] flex items-center justify-end space-x-4'>
-            <button 
-              type="button"
-              className="rounded-3xl bg-white border-2 border-black text-black px-4 py-1.25 font-semibold hover:bg-gray-100"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
-            <button 
-              type="submit"
-              disabled={isSubmitting}
-              className="ml-5 rounded-3xl font-semibold text-white px-4 py-1.25"
-              style={{ background: 'linear-gradient(to right, #1cadf8, #1099e1)' }}
-            >
-              {isSubmitting ? 'Creating...' : 'Create'}
-            </button>
+          <div className='h-[10%] flex flex-col justify-between'>
+            {/* 错误或成功提示 */}
+            {(error || success) && (
+              <div className="text-center text-sm">
+                {error && <div className="text-red-600">{error}</div>}
+                {success && <div className="text-green-600">{success}</div>}
+              </div>
+            )}
+
+            {/* 按钮组 */}
+            <div className="flex justify-end items-center space-x-4 mt-2">
+              <button 
+                type="button"
+                className="rounded-3xl bg-white border-2 border-black text-black px-4 py-1.25 font-semibold hover:bg-gray-100"
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+              <button 
+                type="submit"
+                disabled={isSubmitting}
+                className="ml-5 rounded-3xl font-semibold text-white px-4 py-1.25"
+                style={{ background: 'linear-gradient(to right, #1cadf8, #1099e1)' }}
+              >
+                {isSubmitting ? 'Creating...' : 'Create'}
+              </button>
+            </div>
           </div>
+
         </form>
       </div>
     </div>
