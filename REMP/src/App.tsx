@@ -5,9 +5,9 @@ import { AgentPropertyPage } from './components/AgentPropertyPage/AgentPropertyP
 import PropertyDetails from './components/PropertyDetails';
 import HeroImageSelect from './components/HeroImageSelect';
 import AgentsPage from './components/PhotoGraphyCompany/AgentsPage';
-import DashboardLayout from './components/DashboardLayout';
+import DashboardLayout from './components/ListingDashBoard/DashboardLayout';
 import AddAgentByEmail from './components/PhotoGraphyCompany/AddAgentByEmail';
-import ListingDashboard from './components/ListingDashboard/ListingDashboard';
+import ListingDashboard from './components/ListingDashBoard/ListingDashboard';
 import ConpanySignUpPage from './components/PhotoGraphyCompany/ConpanySignUp';
 import PhotographyCompanyPortal from './components/PhotoGraphyCompany/PhotographyCompanyPortal';
 import PreviewPage from './components/PropertyPreviewPage/PreviewPage';
@@ -27,7 +27,6 @@ function App() {
       <Routes>
         <Route path="/AgentPropertyPage" element={<AgentPropertyPage/>} />
         <Route path="/dashboard" element={<ListingDashboard />} />
-        <Route path="/property/:listingId" element={<PropertyDetails />} />
         <Route path="/login" element={<SignInPage/>} />
         <Route path="/DashboardLayout" element={<DashboardLayout/>} />
         <Route path="/ConpanySignUpPage" element={<ConpanySignUpPage/>} />
@@ -36,6 +35,7 @@ function App() {
         <Route path="/portal" element={<PhotographyCompanyPortal />} />
         <Route path="/preview/:id" element={<PreviewPage />} />
         <Route path="/ChangePasswordPage" element={<ChangePasswordPage/>} />
+        <Route path="/property/:listingId" element={<PropertyDetails />} />
 
         <Route
           path="/hero-select"

@@ -10,8 +10,9 @@ import { getListingCaseDetail } from '../api/listingcase/listing-api';
 
 import CommonModal from '../components/CommonModal';
 import PhotographyUploadForm from '../components/PhotographyUploadForm';
-import ListingUpdateDialog from './ListingDashboard/ListingUpdate';
+
 import { ListingCase } from '../interfaces/listing-case';
+import ListingUpdateDialog from './ListingDashBoard/ListingUpdate';
 
 interface PropertyDetailProps {
   id?: number;
@@ -19,7 +20,8 @@ interface PropertyDetailProps {
 
 const PropertyDetail = ({ id }: PropertyDetailProps) => {
   const { listingId: paramId } = useParams();
-  const listingId = id ?? (paramId ? Number(paramId) : undefined);
+  const cleanId = paramId?.startsWith(':') ? paramId.slice(1) : paramId;
+  const listingId = id ?? (cleanId && !isNaN(Number(cleanId)) ? Number(cleanId) : undefined);
 
   const [assets, setAssets] = useState<ListingAssetStatus | null>(null);
   const [loading, setLoading] = useState(true);
