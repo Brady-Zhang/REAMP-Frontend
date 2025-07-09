@@ -3,7 +3,7 @@ import { mapEamilReturnToAgent } from "../../lib/map-to-agent";
 import apiClient from "../apiClient";
 
 export const searchAgent = async (searchTerm: string): Promise<Agent[]> => {
-  const response = await apiClient.get('User/search-agent', {
+  const response = await apiClient.get('/User/search-agent', {
     params: { searchTerm }
   });
 

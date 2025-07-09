@@ -4,13 +4,12 @@ import { getCaseContactsByListing } from '../../api/caseContactApi';
 import { CaseContactResponseDto } from '../../interfaces/CaseContact';
 import { HiPencil, HiTrash } from 'react-icons/hi';
 import AgentContact from '../AgentContact/AgentContact';
+import default_avatar from '../../assets/default-avatar.jpg'
 
 interface PreviewPageFooterProps {
   listingId?: number;
 }
 
-const default_avatar =
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSalljTSZqVNiMcODXhfKpF25M-mn_-6fVx8g&s';
 
 const PreviewPageFooter: React.FC<PreviewPageFooterProps> = ({ listingId }) => {
   const [contacts, setContacts] = useState<CaseContactResponseDto[]>([]);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { photographySignUp } from '../../api/photography/signUp-api';
 
-const ConpanySignUpPage = () => {
+const CompanySignUpPage = () => {
   const [photographyCompanyName, setPhotographyCompanyName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -116,4 +116,4 @@ const ConpanySignUpPage = () => {
   )
 }
 
-export default ConpanySignUpPage
+export default CompanySignUpPage

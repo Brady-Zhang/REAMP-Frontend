@@ -11,5 +11,5 @@ export const createAgentAccount = async(form:createAgentForm): Promise<void> => 
   if (form.avatarImage) {
     formData.append("AvatarImage", form.avatarImage);
   }
-  await apiClient.post("User/CreateAgentAccount", formData);
+  await apiClient.post("/User/CreateAgentAccount", formData);
 };

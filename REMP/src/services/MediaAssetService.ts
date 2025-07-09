@@ -32,7 +32,7 @@ export const uploadMediaToListingCase = async (params: UploadMediaParams) => {
 
 export const getMediaAssetsByListingId = async (listingCaseId: number) => {
   try {
-    const response = await apiClient.get(`MediaAsset/${listingCaseId}/media`);
+    const response = await apiClient.get(`/MediaAsset/${listingCaseId}/media`);
     return response.data;
   } catch (error) {
     console.error("getMediaAssetsByListingId failed:", error);

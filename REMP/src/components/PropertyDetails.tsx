@@ -14,6 +14,14 @@ import PhotographyUploadForm from '../components/PhotographyUploadForm';
 import { ListingCase } from '../interfaces/listing-case';
 import ListingUpdateDialog from './ListingDashBoard/ListingUpdate';
 
+import { ListingCaseDetail  } from '../interfaces/listing-case';
+import { MediaType } from '../enums/mediaType';
+import MediaUploadForm from './MediaUploadForm';
+import { Agent } from '../interfaces/agent-response';
+import { getAllAgents } from '../api/agent/get-all-agents';
+import AssignAgentPopupContent from './AssignAgentPopupContent';
+
+
 interface PropertyDetailProps {
   id?: number;
 }
@@ -31,17 +39,34 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
   const [uploadPhotographyType, setUploadPhotographyType] = useState<'W' | 'P'>('W');
 
   const [isEditing, setIsEditing] = useState(false);
-  const [currentListing, setCurrentListing] = useState<ListingCase | null>(null);
+  const [currentListing, setCurrentListing] = useState<ListingCaseDetail  | null>(null);
+
+  const [mediaUploadType, setMediaUploadType] = useState<MediaType | null>(null);
+  const [isMediaModalOpen, setMediaModalOpen] = useState(false);
+
+  const [isAssignAgentOpen, setAssignAgentOpen] = useState(false);
+  const [agents, setAgents] = useState<Agent[]>([]);
+
+  const [allMediaAssets, setAllMediaAssets] = useState<MediaAssetResponseDto[]>([]);
 
   useEffect(() => {
     if (!listingId) return;
     fetchAssets(Number(listingId));
   }, [listingId]);
 
+  useEffect(() => {
+    if (isAssignAgentOpen) {
+      getAllAgents()
+        .then((res) => setAgents(res))
+        .catch((err) => console.error('Failed to load agents', err));
+    }
+  }, [isAssignAgentOpen]);
+
   const fetchAssets = async (id: number) => {
     try {
       const listing = await getListingCaseDetail(id);
       const data = flattenMediaAssets(listing.mediaAssets);
+      setAllMediaAssets(data);
       const { status, pictureCount } = calculateMediaStatus(data);
 
       setCurrentListing(listing);
@@ -66,7 +91,7 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
   const calculateMediaStatus = (assets: MediaAssetResponseDto[]) => {
     const status: ListingAssetStatus = {
       photographyW: false,
-      photographyP: false,
+      assignAgent: false,
       floorPlan: false,
       videography: false,
       vrTour: false,
@@ -80,8 +105,6 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
           pictureCount++;
           if (pictureCount === 1) {
             status.photographyW = true;
-          } else {
-            status.photographyP = true;
           }
           break;
         case 2: // Video
@@ -100,7 +123,7 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
 
   const assetBlocks = [
     { label: 'Photography-W', key: 'photographyW', icon: <BsCamera className="text-blue-600 text-2xl" />, showCount: true },
-    { label: 'Photography-P', key: 'photographyP', icon: <BsCamera className="text-orange-500 text-2xl" /> },
+    { label: 'Assign Agent', key: 'assignAgent', icon: <BsCamera className="text-orange-500 text-2xl" />, alwaysOn: true },
     { label: 'Floor Plan', key: 'floorPlan', icon: <HiOutlineDocumentSearch className="text-green-600 text-2xl" /> },
     { label: 'Videography', key: 'videography', icon: <BsCameraVideo className="text-gray-400 text-2xl" /> },
     { label: 'VR Tour', key: 'vrTour', icon: <FaVrCardboard className="text-gray-400 text-2xl" /> },
@@ -129,11 +152,22 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
                 } else if (asset.key === 'photographyP') {
                   setUploadPhotographyType('P');
                   setPhotographyModalOpen(true);
+                } else if (asset.key === 'floorPlan') {
+                  setMediaUploadType(MediaType.FloorPlan);
+                  setMediaModalOpen(true);
+                } else if (asset.key === 'videography') {
+                  setMediaUploadType(MediaType.Video);
+                  setMediaModalOpen(true);
+                } else if (asset.key === 'vrTour') {
+                  setMediaUploadType(MediaType.VRTour);
+                  setMediaModalOpen(true);
+                } else if (asset.key === 'assignAgent') {
+                  setAssignAgentOpen(true);
                 } else if (asset.key === 'propertyDetails') {
                   setIsEditing(true);
-                  return;
                 }
               }}
+
             >
               {asset.showCount && pictureCount > 0 && (
                 <span className="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">
@@ -157,10 +191,42 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
       >
         <PhotographyUploadForm
           listingId={Number(listingId)}
+          existingAssets={allMediaAssets.filter(a => Number(a.mediaType) === MediaType.Picture)}
           onUploadSuccess={() => {
             setPhotographyModalOpen(false);
             fetchAssets(Number(listingId));
           }}
+        />
+      </CommonModal>
+
+      <CommonModal
+        isOpen={isMediaModalOpen}
+        onClose={() => setMediaModalOpen(false)}
+        title={`Upload ${MediaType[mediaUploadType!]}`}
+        size="lg"
+      >
+        {mediaUploadType && (
+          <MediaUploadForm
+            listingId={Number(listingId)}
+            mediaType={mediaUploadType}
+            existingAssets={allMediaAssets}
+            onUploadSuccess={() => {
+              setMediaModalOpen(false);
+              fetchAssets(Number(listingId));
+            }}
+          />
+        )}
+      </CommonModal>
+
+
+      <CommonModal
+        isOpen={isAssignAgentOpen}
+        onClose={() => setAssignAgentOpen(false)}
+        title="Assign Agent"
+        size="lg"
+      >
+        <AssignAgentPopupContent
+          listingCaseId={Number(listingId)}
         />
       </CommonModal>
 
@@ -170,7 +236,7 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
           onClose={() => setIsEditing(false)}
           onUpdated={() => {
             setIsEditing(false);
-            fetchAssets(currentListing?.id); // 重新加载数据
+            fetchAssets(currentListing?.id);
           }}
         />
       )}

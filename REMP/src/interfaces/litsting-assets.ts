@@ -1,6 +1,6 @@
 export interface ListingAssetStatus {
     photographyW: boolean;
-    photographyP: boolean;
+    assignAgent: boolean;
     floorPlan: boolean;
     videography: boolean;
     vrTour: boolean;

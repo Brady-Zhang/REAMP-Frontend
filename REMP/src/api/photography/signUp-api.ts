@@ -2,7 +2,7 @@ import { photographySignUpRequest } from "../../interfaces/photographySignUpRequ
 import apiClient from "../apiClient";
 
 export const photographySignUp = async({password, email, phoneNumber, photographyCompanyName}:photographySignUpRequest) => {
-    await apiClient.post('User/CreatePhotographyCompany',{ 
+    await apiClient.post('/User/CreatePhotographyCompany',{ 
         username: email,
         password, 
         email, 
