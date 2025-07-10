@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { getListingCases } from "../../api/listingcase/listing-api";
 import { ListingCase } from "../../interfaces/listing-case";
-import PropertyModalContainer from "../PropertyModalContainer"
+import PropertyModalContainer from "../CreateNewProperty/AddPropertyModal"
 
 
-import PropertyDetail from "../PropertyDetails";
+import PropertyDetail from "../PropertyEdit/PropertyDetails";
 import DeleteListingButton from "./DeleteListing";
 import ListingUpdateDialog from "./ListingUpdate";
 

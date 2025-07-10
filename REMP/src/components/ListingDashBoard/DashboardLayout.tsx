@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 import DashboardNavbar from './DashboardNavbar';
-import PhotographyCompanyDashboard from '../PhotographyCompanyDashboard';
+
 import AgentList from '../AgentList/AgentList';
 import ListingDashboard from './ListingDashboard';
+import PhotographyCompanyDashboard from '../PhotoGraphyCompany/PhotographyCompanyDashboard';
 
 const allNavItems = ['Listing', 'Agents', 'Photography companies'] as const;
 type ButtonType = typeof allNavItems[number];

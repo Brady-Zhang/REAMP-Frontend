@@ -1,9 +1,10 @@
-import defaultAvatar from '../assets/default-avatar.jpg'
+import { getAllAgents } from '../../api/agent/get-all-agents';
+import { assignAgentToListing } from '../../api/listingcase/listing-addAgent';
+import { getListingCaseDetail } from '../../api/listingcase/listing-api';
+import { Agent } from '../../interfaces/agent-response';
+import defaultAvatar from '../../assets/default-avatar.jpg'
 import React, { useEffect, useState } from 'react';
-import { getListingCaseDetail } from '../api/listingcase/listing-api';
-import { Agent } from '../interfaces/agent-response';
-import { getAllAgents } from '../api/agent/get-all-agents';
-import { assignAgentToListing } from '../api/listingcase/listing-addAgent';
+
 
 interface AssignAgentPopupContentProps {
   listingCaseId: number;

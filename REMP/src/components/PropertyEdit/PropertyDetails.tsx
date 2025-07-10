@@ -1,25 +1,26 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { ListingAssetStatus } from '../interfaces/litsting-assets';
+import { ListingAssetStatus } from '../../interfaces/litsting-assets';
 import { BsCamera, BsCameraVideo, BsHouse } from 'react-icons/bs';
 import { FaVrCardboard } from 'react-icons/fa';
 import { HiOutlineDocumentSearch } from 'react-icons/hi';
 
-import { MediaAssetResponseDto } from '../interfaces/MediaAssetResponseDto';
-import { getListingCaseDetail } from '../api/listingcase/listing-api';
+import { MediaAssetResponseDto } from '../../interfaces/MediaAssetResponseDto';
+import { getListingCaseDetail } from '../../api/listingcase/listing-api';
 
-import CommonModal from '../components/CommonModal';
-import PhotographyUploadForm from '../components/PhotographyUploadForm';
+import CommonModal from '../CommonModal';
 
-import { ListingCase } from '../interfaces/listing-case';
-import ListingUpdateDialog from './ListingDashBoard/ListingUpdate';
 
-import { ListingCaseDetail  } from '../interfaces/listing-case';
-import { MediaType } from '../enums/mediaType';
+import { ListingCase } from '../../interfaces/listing-case';
+import ListingUpdateDialog from '../ListingDashBoard/ListingUpdate';
+
+import { ListingCaseDetail  } from '../../interfaces/listing-case';
+import { MediaType } from '../../enums/mediaType';
 import MediaUploadForm from './MediaUploadForm';
-import { Agent } from '../interfaces/agent-response';
-import { getAllAgents } from '../api/agent/get-all-agents';
+import { Agent } from '../../interfaces/agent-response';
+import { getAllAgents } from '../../api/agent/get-all-agents';
 import AssignAgentPopupContent from './AssignAgentPopupContent';
+import PhotographyUploadForm from '../PhotoGraphyCompany/PhotographyUploadForm';
 
 
 interface PropertyDetailProps {

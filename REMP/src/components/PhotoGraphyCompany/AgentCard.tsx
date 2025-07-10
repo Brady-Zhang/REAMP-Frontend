@@ -1,5 +1,5 @@
 import React from 'react';
-import { Agent } from '../../interfaces/agent';
+import { Agent } from '../../interfaces/agent-response';
 
 type Props = {
     agent: Agent;
