@@ -1,6 +1,6 @@
 import React from 'react';
-import CommonModal from './CommonModal';
-import PropertyForm from './PropertyForm';
+import CommonModal from '../CommonModal';
+import PropertyForm from './AddPropertyForm';
 
 interface PropertyModalContainerProps {
   isOpen: boolean;

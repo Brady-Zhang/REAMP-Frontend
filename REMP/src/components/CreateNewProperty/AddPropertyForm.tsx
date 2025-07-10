@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { PropertyData } from '../types/Property';
-import { createListing } from '../services/PropertyService';
-import { PropertyTypeOptions } from '../enums/propertyType';
-import { SaleCategoryOptions } from '../enums/saleCategory';
 import { FaBed, FaBath, FaCar, FaRulerCombined } from 'react-icons/fa';
 import { FiPlus, FiMinus } from 'react-icons/fi';
+import { PropertyData } from '../../types/Property';
+import { createListing } from '../../services/PropertyService';
+import { PropertyTypeOptions } from '../../enums/propertyType';
+import { SaleCategoryOptions } from '../../enums/saleCategory';
 import GooglePlacesAutocomplete from './GooglePlacesAutocomplete';
+
 
 type PropertyFormProps = {
   onClose: () => void;

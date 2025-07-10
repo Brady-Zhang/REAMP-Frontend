@@ -1,8 +1,9 @@
 // src/components/PhotographyCompanyDashboard.tsx
 
 import { useEffect, useState } from 'react';
-import { PhotographyCompany } from '../interfaces/PhotographyCompany';
-import { getAllPhotographyCompanies } from '../api/photography/getAllPhotographyCompany';
+import { PhotographyCompany } from '../../interfaces/PhotographyCompany';
+import { getAllPhotographyCompanies } from '../../api/photography/getAllPhotographyCompany';
+
 
 const PhotographyCompanyDashboard: React.FC = () => {
   const [companies, setCompanies] = useState<PhotographyCompany[]>([]);
