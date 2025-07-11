@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { getListingCases } from "../../api/listingcase/listing-api";
 import { ListingCase } from "../../interfaces/listing-case";
 import PropertyModalContainer from "../CreateNewProperty/AddPropertyModal"
@@ -10,9 +10,9 @@ import DeleteListingButton from "./DeleteListing";
 import ListingUpdateDialog from "./ListingUpdate";
 
 
-// interface ListingDashboardProps {
-//     scope?: 'company' | 'admin';
-// }
+interface ListingDashboardProps {
+    scope?: 'company' | 'admin';
+}
 
 // Map backend enum values to readable labels
 const getPropertyTypeLabel = (type: number): string => {
@@ -35,7 +35,7 @@ const getStatusLabel = (status: number): string => {
 };
 
 
-const ListingDashboard = () => {
+const ListingDashboard = ({ scope }: ListingDashboardProps) => {
     const [listings, setListings] = useState<ListingCase[]>([]);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [openMenuId, setOpenMenuId] = useState<number | null>(null);
@@ -53,6 +53,9 @@ const ListingDashboard = () => {
                 console.error("Failed to fetch listing cases:", err);
             });
     };
+    useEffect(() => {
+    console.log('Dashboard scope:', scope);
+    }, [scope]);
 
     useEffect(() => {
         fetchListings();
