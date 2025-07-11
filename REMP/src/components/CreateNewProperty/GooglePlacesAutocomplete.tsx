@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Address } from '../types/Address';
+import { Address } from '../../types/Address';
 
 declare global {
   interface Window {

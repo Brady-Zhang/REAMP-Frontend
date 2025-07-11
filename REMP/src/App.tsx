@@ -27,7 +27,7 @@ function App() {
       <Routes>
         <Route path="/AgentPropertyPage" element={<AgentPropertyPage/>} />
         <Route path="/dashboard" element={<ListingDashboard />} />
-        <Route path="/login" element={<SignInPage/>} />
+        <Route path="/" element={<SignInPage/>} />
         <Route path="/DashboardLayout" element={<DashboardLayout/>} />
         <Route path="/CompanySignUpPage" element={<CompanySignUpPage/>} />
         <Route path="/agentspage" element={<AgentsPage/>} />

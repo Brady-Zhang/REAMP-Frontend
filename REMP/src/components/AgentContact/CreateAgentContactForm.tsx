@@ -1,5 +1,5 @@
 // src/components/CreateAgentContactForm.tsx
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { CaseContactRequestDto } from '../../interfaces/CaseContact';
 import { addCaseContact } from '../../api/caseContactApi';
 
@@ -21,7 +21,7 @@ const CreateAgentContactForm: React.FC<CreateAgentContactFormProps> = ({
   const [companyName, setCompanyName] = useState('');
   const [email, setEmail]             = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [avatarFile, setAvatarFile]   = useState<File | null>(null);
+  // const [avatarFile, setAvatarFile]   = useState<File | null>(null);
   const [previewUrl, setPreviewUrl]   = useState('');
 
   // 错误提示
@@ -46,20 +46,21 @@ const CreateAgentContactForm: React.FC<CreateAgentContactFormProps> = ({
   };
 
 
-  const isFormValid =(
-      firstName.trim() &&
-      lastName.trim() &&
-      companyName.trim() &&
-      email.trim() &&
-      phoneNumber.trim()
-    ) &&
+  const isFormValid = useMemo(() => (
+    firstName.trim() &&
+    lastName.trim() &&
+    companyName.trim() &&
+    email.trim() &&
+    phoneNumber.trim() &&
     !companyError &&
     !emailError &&
-    !phoneError;
+    !phoneError
+  ), [firstName, lastName, companyName, email, phoneNumber, companyError, emailError, phoneError]);
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
-    setAvatarFile(file);
+    // setAvatarFile(file);
     if (file) setPreviewUrl(URL.createObjectURL(file));
   };
 
@@ -70,7 +71,7 @@ const CreateAgentContactForm: React.FC<CreateAgentContactFormProps> = ({
     setCompanyName('');
     setEmail('');
     setPhoneNumber('');
-    setAvatarFile(null);
+    // setAvatarFile(null);
     setPreviewUrl('');
     setCompanyError('');
     setEmailError('');
