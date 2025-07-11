@@ -4,16 +4,10 @@ import { ListingAssetStatus } from '../../interfaces/litsting-assets';
 import { BsCamera, BsCameraVideo, BsHouse } from 'react-icons/bs';
 import { FaVrCardboard } from 'react-icons/fa';
 import { HiOutlineDocumentSearch } from 'react-icons/hi';
-
 import { MediaAssetResponseDto } from '../../interfaces/MediaAssetResponseDto';
 import { getListingCaseDetail } from '../../api/listingcase/listing-api';
-
 import CommonModal from '../CommonModal';
-
-
-import { ListingCase } from '../../interfaces/listing-case';
 import ListingUpdateDialog from '../ListingDashBoard/ListingUpdate';
-
 import { ListingCaseDetail  } from '../../interfaces/listing-case';
 import { MediaType } from '../../enums/mediaType';
 import MediaUploadForm from './MediaUploadForm';
@@ -46,7 +40,7 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
   const [isMediaModalOpen, setMediaModalOpen] = useState(false);
 
   const [isAssignAgentOpen, setAssignAgentOpen] = useState(false);
-  const [agents, setAgents] = useState<Agent[]>([]);
+  // const [agents, setAgents] = useState<Agent[]>([]);
 
   const [allMediaAssets, setAllMediaAssets] = useState<MediaAssetResponseDto[]>([]);
 
@@ -58,7 +52,7 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
   useEffect(() => {
     if (isAssignAgentOpen) {
       getAllAgents()
-        .then((res) => setAgents(res))
+        // .then((res) => setAgents(res))
         .catch((err) => console.error('Failed to load agents', err));
     }
   }, [isAssignAgentOpen]);
@@ -196,6 +190,7 @@ const PropertyDetail = ({ id }: PropertyDetailProps) => {
           onUploadSuccess={() => {
             setPhotographyModalOpen(false);
             fetchAssets(Number(listingId));
+            if (loading) return <div className="p-6 text-gray-500">Loading assets...</div>;
           }}
         />
       </CommonModal>

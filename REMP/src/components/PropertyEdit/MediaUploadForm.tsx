@@ -1,7 +1,7 @@
 import { useDropzone } from 'react-dropzone';
 import { FaRegFolderOpen } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import { uploadMediaToListingCase, getMediaAssetsByListingId } from '../../services/MediaAssetService';
+import { uploadMediaToListingCase } from '../../services/MediaAssetService';
 import { MediaType } from '../../enums/mediaType';
 import { MediaAssetResponseDto } from '../../interfaces/MediaAssetResponseDto';
 
@@ -19,7 +19,7 @@ export default function GenericMediaUploadForm({
   onUploadSuccess,
 }: GenericMediaUploadFormProps) {
   const [isUploading, setIsUploading] = useState(false);
-  const [existingMediaAssets, setExistingMediaAssets] = useState<MediaAssetResponseDto[]>([]);
+  // const [existingMediaAssets, setExistingMediaAssets] = useState<MediaAssetResponseDto[]>([]);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const getAcceptType = (): { [key: string]: string[] } => {

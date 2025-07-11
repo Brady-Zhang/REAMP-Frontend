@@ -10,9 +10,9 @@ import DeleteListingButton from "./DeleteListing";
 import ListingUpdateDialog from "./ListingUpdate";
 
 
-interface ListingDashboardProps {
-    scope?: 'company' | 'admin';
-}
+// interface ListingDashboardProps {
+//     scope?: 'company' | 'admin';
+// }
 
 // Map backend enum values to readable labels
 const getPropertyTypeLabel = (type: number): string => {
@@ -35,12 +35,12 @@ const getStatusLabel = (status: number): string => {
 };
 
 
-const ListingDashboard = ({ scope }: ListingDashboardProps) => {
+const ListingDashboard = () => {
     const [listings, setListings] = useState<ListingCase[]>([]);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [openMenuId, setOpenMenuId] = useState<number | null>(null);
     const [editingListing, setEditingListing] = useState<ListingCase | null>(null);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [viewDetailListingId, setViewDetailListingId] = useState<number | null>(null);
 
 
