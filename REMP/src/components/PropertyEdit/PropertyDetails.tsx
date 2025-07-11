@@ -11,7 +11,7 @@ import ListingUpdateDialog from '../ListingDashBoard/ListingUpdate';
 import { ListingCaseDetail  } from '../../interfaces/listing-case';
 import { MediaType } from '../../enums/mediaType';
 import MediaUploadForm from './MediaUploadForm';
-import { Agent } from '../../interfaces/agent-response';
+// import { Agent } from '../../interfaces/agent-response';
 import { getAllAgents } from '../../api/agent/get-all-agents';
 import AssignAgentPopupContent from './AssignAgentPopupContent';
 import PhotographyUploadForm from '../PhotoGraphyCompany/PhotographyUploadForm';
